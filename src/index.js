@@ -10,28 +10,38 @@ function getDogs(dog) {
 </tr>
     `
 }
+
+
+
+    
+    
+
+
 document.addEventListener('DOMContentLoaded', () => {
 
     const tableBody = document.querySelector('#table-body')
-    fetch (API_URL)
-    .then(res => res.json())
-    .then(data => {
-        data.forEach(dog => {
-            tableBody.innerHTML += getDogs(dog)
-        })
-    })
-    .catch(error => {
-        console.log(error)
-    })
-    const editBtn = document.querySelectorAll('#edit-btn')
-    editBtn.addEventListener('click', (e) => {
-        e.preventDefault()
-        fetch(API_URL)
+    fetch(API_URL)
         .then(res => res.json())
-        .then(dogForm => {
-            console.log(dogForm)
+        .then(data => {
+            data.forEach(dog => {
+                tableBody.innerHTML += getDogs(dog)
+            })
         })
-    })
+        .catch(error => {
+            console.log(error)
+        })
+    //Unable to edit dogs
+    const editBtn = document.getElementById('edit-btn')
+     editBtn.addEventListener('click', () => {
+         fetch(API_URL)
+         .then(res => res.json())
+         .then(data => {
+             data.forEach(dog => {
+                 tableBody.innerHTML += getDogs(dog)
+             })
+         })
+     })
+    
     
 
     const dogForm = document.querySelector('#dog-form')
@@ -51,8 +61,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 sex,
 
             })
-            })
+        })
     })
+})
+    
+    
     //POST new dog
 
     // const NewDogForm = document.querySelector('#dog-form')
@@ -74,5 +87,3 @@ document.addEventListener('DOMContentLoaded', () => {
     //     })
  
     // })
-})
-
